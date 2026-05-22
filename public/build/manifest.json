@@ -1,0 +1,24 @@
+{
+  "_vendor-DcNlVx-A.js": {
+    "file": "assets/vendor-DcNlVx-A.js",
+    "name": "vendor"
+  },
+  "resources/css/app.css": {
+    "file": "assets/app-oveR4Rst.css",
+    "src": "resources/css/app.css",
+    "isEntry": true,
+    "name": "app",
+    "names": [
+      "app.css"
+    ]
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-DIxKruPO.js",
+    "name": "app",
+    "src": "resources/js/app.js",
+    "isEntry": true,
+    "imports": [
+      "_vendor-DcNlVx-A.js"
+    ]
+  }
+}
