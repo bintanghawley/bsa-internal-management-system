@@ -462,6 +462,7 @@ document.addEventListener('DOMContentLoaded', () => {
     bindAccountGate();
     bindPasswordVisibilityToggles();
     bindTopbar();
+    bindThemeToggle();
     bindBeforeUnloadGuard();
     bindReloadShortcutGuard();
     startWibClock();
@@ -6092,4 +6093,37 @@ document.addEventListener('DOMContentLoaded', () => {
 
     bindVisibilitySync();
     startLiveSync();
-});
+});
+
+function bindThemeToggle() {
+    const toggleBtn = document.getElementById('themeToggle');
+    const iconDark = document.getElementById('themeIconDark');
+    const iconLight = document.getElementById('themeIconLight');
+    
+    if (!toggleBtn) return;
+    
+    const currentTheme = localStorage.getItem('bsa.theme') || 'light';
+    if (currentTheme === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        iconDark.style.display = 'block';
+        iconLight.style.display = 'none';
+    } else {
+        iconDark.style.display = 'none';
+        iconLight.style.display = 'block';
+    }
+    
+    toggleBtn.addEventListener('click', () => {
+        const theme = document.documentElement.getAttribute('data-theme');
+        if (theme === 'dark') {
+            document.documentElement.removeAttribute('data-theme');
+            localStorage.setItem('bsa.theme', 'light');
+            iconDark.style.display = 'none';
+            iconLight.style.display = 'block';
+        } else {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            localStorage.setItem('bsa.theme', 'dark');
+            iconDark.style.display = 'block';
+            iconLight.style.display = 'none';
+        }
+    });
+}
