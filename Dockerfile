@@ -1,18 +1,21 @@
-FROM php:8.3-fpm
+FROM php:8.2-fpm
 
 RUN apt-get update && apt-get install -y \
     git \
-    unzip \
     curl \
+    unzip \
+    zip \
+    libzip-dev \
     libpng-dev \
     libonig-dev \
     libxml2-dev \
     sqlite3 \
     libsqlite3-dev \
-    libzip-dev \
-    zip
-
-RUN docker-php-ext-install pdo pdo_sqlite gd zip
+    && docker-php-ext-install \
+    pdo \
+    pdo_sqlite \
+    zip \
+    gd
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
@@ -22,7 +25,7 @@ COPY . .
 
 RUN composer install --optimize-autoloader --no-dev
 
-RUN chmod -R 775 storage bootstrap/cache
+RUN chmod -R 777 storage bootstrap/cache database
 
 EXPOSE 9000
 
